@@ -16,7 +16,7 @@
   <script defer src="config.js"></script>
   <script defer src="app.js"></script>
   <script defer src="entrance.js?v=cinematic-20261102"></script>
-  <link rel="stylesheet" href="fare-calculator.css?v=20261117">
+  <link rel="stylesheet" href="fare-calculator.css?v=20261117-reorder">
   <script type="module" src="fare-calculator.js?v=open-routing-20261028"></script>
 </head>
 
@@ -137,6 +137,15 @@
           <div class="trip-panel-heading"><span class="fare-step">01</span>
             <h3>Your itinerary</h3>
           </div>
+          <div class="trip-field-grid trip-itinerary-header-grid"><label>Pickup date<input name="journey_date" type="date"
+                required></label><label>Pickup time · IST<input name="pickup_time" type="time"
+                required></label><label>Passengers<input name="passenger_count" type="number" min="1" max="18" step="1"
+                value="1" required></label><label>Trip type<select name="trip_type">
+                <option value="local">Local rental</option>
+                <option value="one_way">One way</option>
+                <option value="round_trip">Round trip</option>
+                <option value="outstation">Outstation</option>
+              </select></label></div>
           <div class="location-field"><label for="trip-pickup">Pickup location</label>
             <div class="location-input"><span aria-hidden="true">●</span><input id="trip-pickup" autocomplete="off"
                 placeholder="Address, area or city" maxlength="200" minlength="2" required></div>
@@ -167,21 +176,12 @@
           <p class="trip-help">Enter a public landmark, station or area and press Calculate to find matching places.
             Confirm both matches to calculate the road distance. Avoid private or confidential details in public
             searches.</p>
-          <div class="trip-field-grid"><label>Pickup date<input name="journey_date" type="date"
-                required></label><label>Pickup time · IST<input name="pickup_time" type="time"
-                required></label><label>Passengers<input name="passenger_count" type="number" min="1" max="18" step="1"
-                value="1" required></label><label>Trip type<select name="trip_type">
-                <option value="local">Local rental</option>
-                <option value="one_way">One way</option>
-                <option value="round_trip">Round trip</option>
-                <option value="outstation">Outstation</option>
-              </select></label></div>
-          <label class="trip-distance-mode"><input id="trip-manual-distance" type="checkbox"> Enter the distance myself
-            instead</label>
           <label class="trip-distance-field"><span id="trip-distance-label">Calculated road distance · km</span><input
               name="distance_km" type="number" min="0.1" max="10000" step="any"
               placeholder="Calculated after confirming places" readonly disabled><span id="trip-distance-help"
               class="trip-help">Driving time excludes live traffic, stops and waiting.</span></label>
+          <label class="trip-distance-mode"><input id="trip-manual-distance" type="checkbox"> Enter the distance myself
+            instead</label>
           <p class="trip-help osm-attribution">Address search: <a href="https://nominatim.openstreetmap.org/"
               target="_blank" rel="noopener noreferrer">Nominatim</a> · Routing: <a
               href="https://routing.openstreetmap.de/about.html" target="_blank" rel="noopener noreferrer">OSRM /

@@ -1828,7 +1828,7 @@ img {
 .footer-desc {
   font-size: 12.5px;
   line-height: 1.7;
-  color: #8c899c;
+  color: #171717;
   margin: 0 0 20px;
   max-width: 320px;
 }
@@ -1892,7 +1892,7 @@ img {
 }
 
 .footer-nav a {
-  color: #9f9dae;
+  color: #000000;
   font-size: 13px;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -1918,7 +1918,7 @@ img {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  color: #9f9dae;
+  color: #111111;
   line-height: 1.5;
 }
 
@@ -1939,7 +1939,7 @@ img {
 }
 
 .footer-contact-list a {
-  color: #e4e3ec;
+  color: #09090a;
   text-decoration: none;
   transition: color 0.2s ease;
 }
