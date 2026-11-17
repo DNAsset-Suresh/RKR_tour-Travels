@@ -1,4 +1,6 @@
 import './config/env.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -9,9 +11,17 @@ import { vehicleRoutes } from './routes/vehicleRoutes.js';
 import { contactRoutes } from './routes/contactRoutes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { tripRoutes } from './routes/tripRoutes.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const frontendDir = path.resolve(__dirname, '../frontend');
+
 export const app = express();
 app.disable('x-powered-by');
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
 const origins = (process.env.FRONTEND_ORIGIN || 'http://localhost:3001,http://localhost:3002').split(',').map(v => v.trim());
 app.use((req, res, next) => {
   const origin = req.get('origin');
@@ -32,14 +42,17 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json({ limit: '16kb' }));
+
+// Serve static assets from frontend
+app.use(express.static(frontendDir));
+
 app.use('/api', rateLimit({ windowMs: 15*60*1000, limit: 300, standardHeaders:'draft-8', legacyHeaders:false, message:{error:{message:'Too many requests. Please wait a few minutes.'}} }));
 const submissions=rateLimit({ windowMs:15*60*1000, limit:20, skip:req=>req.method!=='POST', standardHeaders:'draft-8', legacyHeaders:false, message:{error:{message:'Too many submissions. Please try again in 15 minutes.'}} });
-app.get(['/', '/api'], (req, res) => {
+app.get('/api', (req, res) => {
   res.json({
     status: 'online',
     service: 'RKR TOUR API',
-    frontendUrl: 'http://localhost:3001',
-    message: 'Backend API is running. To open the website, visit http://localhost:3001'
+    message: 'Backend API is running.'
   });
 });
 
@@ -65,5 +78,8 @@ app.use('/api/vehicles', vehicleRoutes);
 app.use('/api/trips', tripRoutes);
 app.use('/api/bookings', submissions, bookingRoutes);
 app.use('/api/contact', submissions, contactRoutes);
-app.use((req,res)=>res.status(404).json({error:{message:'Endpoint not found.'}}));
+app.use('/api', (req, res) => res.status(404).json({ error: { message: 'API endpoint not found.' } }));
+app.use((req, res) => {
+  res.sendFile(path.join(frontendDir, 'index.html'));
+});
 app.use(errorHandler);
