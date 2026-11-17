@@ -115,26 +115,24 @@
   object-fit: contain;
 }
 
-/* RKR Rental Vehicles Styled Showroom Badge (Inside red mark) */
+/* RKR Rental Vehicles Styled Showroom Badge (Overlays & hides the floor star) */
 .video-watermark {
   position: absolute;
-  bottom: 16%;
-  right: 2%;
-  width: clamp(160px, 19.5%, 210px);
-  min-height: 52px;
+  bottom: 22%;
+  right: 2.5%;
+  width: clamp(210px, 24%, 260px);
+  min-height: 56px;
   z-index: 5;
   pointer-events: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 9px 16px;
-  border-radius: 8px;
+  background: #ffffff;
+  border-radius: 9px;
   border: 1.5px solid rgba(226, 232, 240, 0.95);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.04);
+  padding: 10px 18px 9px;
   box-sizing: border-box;
   text-align: center;
   transition: all 0.25s ease;
@@ -145,7 +143,7 @@
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.1px;
   color: #0f172a;
   text-transform: uppercase;
   line-height: 1.25;
@@ -160,7 +158,7 @@
   margin-top: 3px;
   font-size: 7.5px;
   font-weight: 700;
-  letter-spacing: 1.6px;
+  letter-spacing: 1.4px;
   color: #bd4938;
   text-transform: uppercase;
   line-height: 1;
@@ -474,22 +472,22 @@
   }
 
   .video-watermark {
-    bottom: 15%;
-    right: 2%;
-    width: clamp(125px, 25%, 160px);
+    bottom: 21%;
+    right: 2.5%;
+    width: clamp(155px, 35%, 195px);
     min-height: 44px;
-    padding: 6px 10px;
-    border-radius: 6px;
+    padding: 6px 12px;
+    border-radius: 7px;
   }
 
   .video-watermark-title {
     font-size: 8.5px;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
   }
 
   .video-watermark-sub {
     font-size: 6px;
-    letter-spacing: 1px;
+    letter-spacing: 0.9px;
     gap: 3px;
     margin-top: 2px;
   }
