@@ -1,0 +1,19 @@
+{
+  "version": "2026-10-28",
+  "vehicles": {
+    "Swift Dzire": {"one_way": null, "round_trip": null, "outstation": null},
+    "Toyota Etios": {"one_way": null, "round_trip": null, "outstation": null},
+    "Toyota Innova": {"one_way": null, "round_trip": null, "outstation": null},
+    "Innova Crysta": {"one_way": null, "round_trip": null, "outstation": null},
+    "Honda City": {"one_way": null, "round_trip": null, "outstation": null},
+    "Toyota Corolla Altis": {"one_way": null, "round_trip": null, "outstation": null},
+    "Mercedes-Benz E-Class": {"one_way": null, "round_trip": null, "outstation": null},
+    "Mercedes-Benz S-Class": {"one_way": null, "round_trip": null, "outstation": null},
+    "Toyota Fortuner": {"one_way": null, "round_trip": null, "outstation": null},
+    "Kia Carnival": {"one_way": null, "round_trip": null, "outstation": null},
+    "Toyota Innova Hycross": {"one_way": null, "round_trip": null, "outstation": null},
+    "Force Urbania": {"one_way": null, "round_trip": null, "outstation": null},
+    "Tempo Traveller — 12 Seater Luxury": {"one_way": null, "round_trip": null, "outstation": null},
+    "Tempo Traveller — 18 Seater Luxury": {"one_way": null, "round_trip": null, "outstation": null}
+  }
+}

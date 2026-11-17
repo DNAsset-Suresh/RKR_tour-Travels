@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RKR TOUR — Explore More. Travel Better.</title>
+  <meta name="description"
+    content="Plan a considered journey with RKR TOUR. Explore vehicles, share your itinerary and request a personalised journey.">
+  <meta name="theme-color" content="#f9f7f2">
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="showcase.css">
+  <link rel="stylesheet" href="entrance.css">
+  <link rel="stylesheet" href="tariffs.css">
+  <script defer src="config.js"></script>
+  <script defer src="app.js"></script>
+  <script defer src="entrance.js?v=cinematic-20261102"></script>
+  <link rel="stylesheet" href="fare-calculator.css?v=cinematic-20261102">
+  <script type="module" src="fare-calculator.js?v=open-routing-20261028"></script>
+</head>
+
+<body>
+  <dialog id="cinematic-intro" aria-label="RKR TOUR intro animation">
+    <div class="intro-world">
+      <div class="intro-atmosphere" aria-hidden="true"></div>
+      <div class="intro-road" aria-hidden="true"></div>
+      <header class="intro-header"><a class="intro-logo" href="#vehicles" id="intro-logo"><img src="assets/logo.png" alt="RKR TOUR" class="intro-logo-img">
+          <span>✧</span><small>TOUR</small></a>
+        <p>EXTRAORDINARY ROADS. SHARED MEMORIES.</p><button id="intro-skip" type="button" autofocus>Skip intro
+          ↗</button>
+      </header>
+      <div class="intro-stage" aria-label="Tempo Traveller photographic animation">
+        <div class="intro-van" id="intro-van">
+          <div class="intro-contact-shadow" aria-hidden="true"></div>
+          <img class="intro-reflection" src="assets/traveller-side.png" width="1536" height="1024" alt=""
+            aria-hidden="true">
+          <img id="intro-photo" class="intro-photo" src="assets/traveller-side.png" width="1536" height="1024"
+            alt="White Tempo Traveller arriving from the right, using the supplied side-view photograph">
+          <div class="intro-van-decal" id="intro-van-decal" aria-hidden="true">
+            <img src="assets/logo.png" alt="RKR TOUR Decal" class="van-decal-img">
+            <div class="van-decal-shine" aria-hidden="true"></div>
+          </div>
+          <span class="intro-wheel intro-front-wheel" aria-hidden="true"></span><span
+            class="intro-wheel intro-rear-wheel" aria-hidden="true"></span>
+          <span class="intro-van-brand" aria-hidden="true">RKR TOUR<small>YOUR JOURNEY, OUR
+              RESPONSIBILITY.</small></span><span class="intro-roof-brand" aria-hidden="true">RKR TOUR</span>
+          <span class="intro-headlight" aria-hidden="true"></span><span class="intro-beam" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="intro-bottom"><span>THE RKR TOUR EXPERIENCE · PHOTO ANIMATION</span>
+        <p id="intro-motion-status" role="status">Arriving in style…</p>
+      </div>
+    </div>
+  </dialog>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="site-header">
+    <a class="brand" href="#home" aria-label="RKR TOUR home">
+      <img src="assets/logo.png" alt="RKR TOUR Logo" class="brand-logo" width="160" height="48">
+      <span class="brand-text">RKR <b>TOUR</b><small>THE JOURNEY MATTERS.</small></span>
+    </a>
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation" aria-controls="site-nav"
+      aria-expanded="false">Menu <span>☰</span></button>
+    <nav id="site-nav" aria-label="Main navigation"><a href="#home" class="active" aria-current="location">Home</a><a
+        href="#vehicles">Our Vehicles</a><a href="#fare-calculator">Fare Calculator</a><a href="#booking">Booking &
+        Contact</a></nav>
+    <a class="button compact header-cta" href="#booking">Let’s plan a trip <span>↗</span></a>
+  </header>
+  <main id="main">
+    <section id="home" class="home-video-section" aria-label="Home presentation video">
+      <video class="home-video" autoplay loop muted playsinline preload="auto">
+        <source src="assets/Home.mp4" type="video/mp4">
+      </video>
+    </section>
+    <section id="vehicles" class="section fleet-section">
+      <div class="section-heading reveal">
+        <div>
+          <div class="fleet-luxury-pill"><span class="pill-star">✦</span> ROYAL CHAUFFEUR FLEET <span class="pill-star">✦</span></div>
+          <p class="eyebrow">01 / FIND YOUR PERFECT RIDE</p>
+          <h2>A Little Comfort.<br><em>A World of Possibilities.</em></h2>
+        </div>
+        <div class="heading-note">
+          <p>From seamless city transfers to grand group journeys across South India.<br>Explore our meticulously maintained, premium chauffeur-driven fleet.</p>
+          <div class="fleet-perks">
+            <span class="fleet-perk">✨ Sanitized & Inspected</span>
+            <span class="fleet-perk">👨‍✈️ Professional Chauffeurs</span>
+            <span class="fleet-perk">📋 Transparent Tariffs</span>
+            <span class="fleet-perk">⚡ 24/7 Road Assistance</span>
+          </div>
+        </div>
+      </div>
+      <section id="showcase" class="cinematic-showcase" aria-labelledby="showcase-title" hidden>
+        <h3 id="showcase-title">Cinematic fleet showcase <span>· Watch our cars in motion</span></h3>
+        <div id="showcase-tabs" class="showcase-tabs" role="tablist" aria-label="Choose a vehicle to preview"></div>
+        <div id="showcase-panel" role="tabpanel" tabindex="0">
+          <div class="showcase-screen">
+            <video id="showcase-video" muted playsinline loop autoplay preload="auto"
+              aria-label="Selected vehicle reference video"></video>
+            <img id="showcase-image" src="assets/traveller.png" alt="Selected vehicle reference image" hidden>
+            <p id="showcase-media-status" class="showcase-media-status" role="status"></p>
+            <div class="showcase-sidebar">
+              <div class="showcase-filter-panel">
+                <p class="showcase-filter-label">Find your ride</p>
+                <div class="filters" role="group" aria-label="Filter vehicle category"><button data-filter="All"
+                    aria-pressed="true">All vehicles</button><button data-filter="Sedan"
+                    aria-pressed="false">Sedans</button><button data-filter="MPV"
+                    aria-pressed="false">MPVs</button><button data-filter="Luxury"
+                    aria-pressed="false">Luxury</button><button data-filter="SUV"
+                    aria-pressed="false">SUVs</button><button data-filter="Traveller"
+                    aria-pressed="false">Traveller</button></div>
+              </div>
+              <aside class="showcase-summary showcase-overlay" aria-label="Selected vehicle details and tariffs">
+                <div class="showcase-model"><span id="showcase-category" class="showcase-category"></span>
+                  <h4 id="showcase-name"></h4>
+                </div>
+                <div id="showcase-tariff" class="showcase-tariff" aria-live="polite"></div>
+                <div class="showcase-actions"><button id="showcase-book" class="button" type="button">Book This Vehicle
+                    ↗</button><a class="showcase-all" href="#fare-calculator">Calculate your fare ↗</a></div>
+              </aside>
+            </div>
+          </div>
+          <p id="showcase-note" class="showcase-note">Supplied reference video · exact vehicle and availability require
+            confirmation.</p>
+        </div>
+      </section>
+    </section>
+
+    <section id="fare-calculator" class="section fare-section" aria-labelledby="fare-title">
+      <div class="fare-heading reveal">
+        <div>
+          <p class="eyebrow">YOUR ROUTE. YOUR RIDE.</p>
+          <h2 id="fare-title">A journey worth<br><em>planning.</em></h2>
+        </div>
+      </div>
+      <p id="fare-setup" class="fare-notice" role="status">Connecting to the journey planner…</p>
+      <div class="fare-workspace">
+        <form id="trip-form" class="trip-panel reveal reveal-left" aria-label="Calculate your trip fare">
+          <div class="trip-panel-heading"><span class="fare-step">01</span>
+            <h3>Your itinerary</h3>
+          </div>
+          <div class="location-field"><label for="trip-pickup">Pickup location</label>
+            <div class="location-input"><span aria-hidden="true">●</span><input id="trip-pickup" autocomplete="off"
+                placeholder="Address, area or city" maxlength="200" minlength="2" required>
+              <button type="button" class="use-location-btn" id="btn-use-location" title="Use my current location">📍 My Location</button>
+            </div>
+            <div id="pickup-suggestions" class="place-matches" role="listbox" aria-label="Matching pickup places" hidden>
+            </div>
+          </div>
+          <button id="trip-swap" class="trip-swap" type="button" title="Swap locations">⇅ Swap locations</button>
+          <div class="route-3d-path" id="route-3d-path" aria-hidden="true">
+            <div class="route-pin start-pin"><span class="pin-icon">📍</span><span class="pin-label" id="route-start-label">Pickup</span></div>
+            <div class="route-road"><span class="road-line"></span><span class="road-car">🚗</span></div>
+            <div class="route-pin end-pin"><span class="pin-icon">🏁</span><span class="pin-label" id="route-end-label">Drop-off</span></div>
+          </div>
+          <div id="destinations-wrapper">
+            <div class="location-field" id="destination-field-0"><label for="trip-destination">Destination</label>
+              <div class="location-input"><span aria-hidden="true">■</span><input id="trip-destination"
+                  autocomplete="off" placeholder="Where would you like to go?" maxlength="200" minlength="2" required>
+              </div>
+              <div id="destination-suggestions" class="place-matches" role="group"
+                aria-label="Matching destination places" hidden></div>
+            </div>
+            <div id="extra-destinations-list"></div>
+          </div>
+          <button id="add-destination-btn" class="add-destination-btn" type="button" hidden>+ Add more
+            destination</button>
+          <p class="trip-help">Enter a public landmark, station or area and press Calculate to find matching places.
+            Confirm both matches to calculate the road distance. Avoid private or confidential details in public
+            searches.</p>
+          <div class="trip-field-grid"><label>Pickup date<input name="journey_date" type="date"
+                required></label><label>Pickup time · IST<input name="pickup_time" type="time"
+                required></label><label>Passengers<input name="passenger_count" type="number" min="1" max="18" step="1"
+                value="1" required></label><label>Trip type<select name="trip_type">
+                <option value="local">Local rental</option>
+                <option value="one_way">One way</option>
+                <option value="round_trip">Round trip</option>
+                <option value="outstation">Outstation</option>
+              </select></label></div>
+          <label class="trip-distance-mode"><input id="trip-manual-distance" type="checkbox"> Enter the distance myself
+            instead</label>
+          <label class="trip-distance-field"><span id="trip-distance-label">Calculated road distance · km</span><input
+              name="distance_km" type="number" min="0.1" max="10000" step="any"
+              placeholder="Calculated after confirming places" readonly disabled><span id="trip-distance-help"
+              class="trip-help">Driving time excludes live traffic, stops and waiting.</span></label>
+          <p class="trip-help osm-attribution">Address search: <a href="https://nominatim.openstreetmap.org/"
+              target="_blank" rel="noopener noreferrer">Nominatim</a> · Routing: <a
+              href="https://routing.openstreetmap.de/about.html" target="_blank" rel="noopener noreferrer">OSRM /
+              FOSSGIS</a> · © <a href="https://www.openstreetmap.org/copyright" target="_blank"
+              rel="noopener noreferrer">OpenStreetMap contributors</a> · <a
+              href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener noreferrer">Fix the map</a>
+          </p>
+          <div id="trip-local-options" class="trip-field-grid"><label>Rental package<select name="package_id">
+                <option value="5h50">5 hours / 50 km</option>
+                <option value="10h100">10 hours / 100 km</option>
+              </select></label><label>Planned hours<input name="rental_hours" type="number" min="1" max="240" step="0.5"
+                value="5" required></label></div>
+          <div id="trip-road-options" class="trip-field-grid" hidden><label>Travel days<input name="travel_days"
+                type="number" min="1" max="30" step="1" value="1" required></label><label>Waiting minutes<input
+                name="waiting_minutes" type="number" min="0" max="1440" step="1" value="0" required></label><label
+              id="trip-return-option" class="trip-checkbox" hidden><input name="return_journey" type="checkbox"> Include
+              return journey</label></div>
+          <button class="button trip-calculate" type="submit">See vehicles & calculate fare ↗</button>
+          <p id="trip-status" class="trip-status" role="status" aria-live="polite"></p>
+          <a class="trip-manual-link" href="#booking">Prefer a personal quote? Send a request ↗</a>
+        </form>
+        <div class="trip-vehicles-panel reveal reveal-right">
+          <div class="trip-panel-heading"><span class="fare-step">02</span>
+            <h3>Choose your ride</h3>
+          </div>
+          <p id="trip-fleet-note" class="trip-help">Road distance and your selected package determine each estimate.
+            Availability and seating are confirmed by the team.</p>
+          <p id="trip-route-summary" class="trip-route-summary" aria-live="polite">Enter pickup and destination to
+            calculate road distance and vehicle fares.</p>
+          <div id="trip-route-choices" class="trip-route-choices"></div>
+          <div id="trip-vehicles" class="trip-vehicles" aria-live="polite">
+            <p class="trip-empty">Loading the RKR fleet…</p>
+          </div>
+        </div>
+      </div>
+      <section id="trip-estimate" class="trip-estimate" aria-labelledby="trip-estimate-title" hidden>
+        <div class="trip-summary-main">
+          <p class="eyebrow">YOUR TRIP ESTIMATE · INR</p>
+          <h3 id="trip-estimate-title"></h3>
+          <p id="trip-summary-route"></p>
+          <dl id="trip-breakdown" class="trip-breakdown"></dl>
+          <p id="trip-assumptions" class="trip-help"></p>
+          <p id="trip-exclusions" class="trip-help"></p>
+        </div>
+        <div class="trip-summary-action">
+          <p class="trip-help">Estimated total · subject to confirmation</p><strong id="trip-total"></strong>
+          <p id="trip-fare-reason" class="trip-help"></p><button id="trip-book" class="button" type="button">Book this
+            vehicle ↗</button><button id="trip-whatsapp" class="button secondary" type="button" hidden>Prepare WhatsApp
+            enquiry ↗</button>
+          <p class="trip-help">No payment is taken. A request becomes a reservation only after the operator confirms.
+          </p>
+        </div>
+      </section>
+
+    </section>
+    <section id="booking" class="section booking-section">
+      <span id="contact" class="section-anchor" aria-hidden="true"></span>
+      <div class="forms-wrapper">
+        <div class="form-tabs" role="tablist" aria-label="Booking and contact options">
+          <button type="button" role="tab" id="tab-booking" class="form-tab active" aria-selected="true"
+            aria-controls="booking-form">🚗 Book a Journey</button>
+          <button type="button" role="tab" id="tab-contact" class="form-tab" aria-selected="false"
+            aria-controls="contact-form">💬 General Enquiry</button>
+        </div>
+        <div class="booking-3d-layout">
+          <div class="booking-flip-card" id="booking-flip-card">
+            <div class="flip-card-inner" id="flip-card-inner">
+              <div class="flip-face flip-face-front">
+                <form id="booking-form" class="form-panel" novalidate>
+                  <div class="form-heading">
+                    <div>
+                      <h3>Plan your journey</h3>
+                      <p class="form-subheading">Send your itinerary for fleet availability and confirmation</p>
+                    </div>
+                    <span>Fields marked * are required</span>
+                  </div>
+                  <div class="form-grid">
+                    <label>Your name *<input name="customer_name" autocomplete="name" minlength="2" maxlength="100"
+                        placeholder="Full name" required></label>
+                    <label>Mobile number *<input name="mobile_number" type="tel" autocomplete="tel" maxlength="25"
+                        placeholder="+91 98765 43210" required></label>
+                    <label class="wide">Email address <span class="optional">(optional)</span><input name="email" type="email"
+                        autocomplete="email" maxlength="254" placeholder="you@example.com"></label>
+                    <label>Pickup location *<input name="pickup_location" id="book-pickup" minlength="2" maxlength="200"
+                        placeholder="Where from?" required></label>
+                    <label>Destination *<input name="destination" id="book-destination" minlength="2" maxlength="200" placeholder="Where to?"
+                        required></label>
+                    <label>Journey date *<input name="journey_date" id="book-date" type="date" required></label>
+                    <label>Pickup time · IST *<input name="pickup_time" id="book-time" type="time" required></label>
+                    <label class="wide">Your preferred vehicle *<select name="vehicle_id" id="booking-vehicle" required
+                        disabled>
+                        <option value="">Loading vehicles…</option>
+                      </select></label>
+                    <label>Passengers *<input name="passenger_count" id="book-passengers" type="number" min="1" max="500" step="1" value="1"
+                        required></label>
+                    <label>Trip type *<select name="trip_type" required>
+                        <option value="one_way">One-way trip</option>
+                        <option value="round_trip">Round trip</option>
+                        <option value="local">Local travel</option>
+                        <option value="outstation">Outstation travel</option>
+                        <option value="airport">Airport pickup or drop</option>
+                      </select></label>
+                    <label class="wide">Anything else? <span class="optional">(optional)</span><textarea
+                        name="additional_requirements" rows="3" maxlength="2000"
+                        placeholder="Return journey, accessibility needs, or something special…"></textarea></label>
+                  </div>
+                  <p id="booking-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+                  <button class="button submit" type="submit">Send Journey Request <span>↗</span></button>
+                  <p class="form-footnote">Your request is saved securely for review. Availability, specifications and fares
+                    will need confirmation.</p>
+                </form>
+              </div>
+              <div class="flip-face flip-face-back">
+                <form id="contact-form" class="form-panel" novalidate>
+                  <div class="form-heading">
+                    <div>
+                      <h3>Say hello</h3>
+                      <p class="form-subheading">Have questions or need assistance? Leave a note for the team</p>
+                    </div>
+                    <span>Fields marked * are required</span>
+                  </div>
+                  <div class="form-grid">
+                    <label>Your name *<input name="customer_name" autocomplete="name" minlength="2" maxlength="100"
+                        required></label>
+                    <label>Mobile number *<input name="mobile_number" type="tel" autocomplete="tel" maxlength="25"
+                        required></label>
+                    <label class="wide">Email address <span class="optional">(optional)</span><input name="email" type="email"
+                        autocomplete="email" maxlength="254"></label>
+                    <label class="wide">Subject *<input name="subject" minlength="3" maxlength="150"
+                        placeholder="How can we help?" required></label>
+                    <label class="wide">Your message *<textarea name="message" minlength="10" maxlength="3000" rows="4"
+                        placeholder="Tell us a little more about your travel plans or question…" required></textarea></label>
+                  </div>
+                  <p id="contact-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+                  <button class="button submit" type="submit">Send Enquiry <span>↗</span></button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <aside class="travel-ticket-card" id="travel-ticket-card" aria-label="Journey Boarding Pass">
+            <div class="ticket-header">
+              <span class="ticket-badge">BOARDING PASS</span>
+              <span class="ticket-brand-name">RKR TOUR</span>
+            </div>
+            <div class="ticket-body">
+              <div class="ticket-route-display">
+                <div class="ticket-station">
+                  <small>PICKUP</small>
+                  <strong id="ticket-pickup">Chennai</strong>
+                </div>
+                <div class="ticket-route-arrow" aria-hidden="true">➔</div>
+                <div class="ticket-station">
+                  <small>DESTINATION</small>
+                  <strong id="ticket-dest">Destination</strong>
+                </div>
+              </div>
+              <div class="ticket-meta-grid">
+                <div><small>DATE</small><span id="ticket-date">--</span></div>
+                <div><small>TIME</small><span id="ticket-time">--</span></div>
+                <div><small>PASSENGERS</small><span id="ticket-passengers">1</span></div>
+                <div><small>VEHICLE</small><span id="ticket-vehicle">Select fleet</span></div>
+              </div>
+              <div class="ticket-barcode" aria-hidden="true">
+                <span>||||||| | ||| ||||||| ||| | |||| |||||||</span>
+              </div>
+            </div>
+            <div class="ticket-stamp" id="ticket-stamp">REQUESTED</div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-3d-road" aria-hidden="true"></div>
+    <div class="footer-container">
+      <div class="footer-brand-col">
+        <a class="footer-brand" href="#home">
+          <img src="assets/logo.png" alt="RKR TOUR Logo" class="footer-logo-img" width="160" height="48">
+          <span class="footer-brand-title">RKR <b>TOUR</b></span>
+        </a>
+        <p class="footer-tagline">Extraordinary roads. Shared memories.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon">📷</a>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-icon">📘</a>
+          <a href="https://wa.me/919629426655" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="social-icon">💬</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-nav">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#vehicles">Our Fleet</a></li>
+          <li><a href="#fare-calculator">Fare Calculator</a></li>
+          <li><a href="#booking">Booking & Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col" id="footer-contact-details">
+        <h4>Contact Us</h4>
+        <ul class="footer-contact-list">
+          <li><span class="contact-lbl">Phone:</span> <a href="tel:+919629426655">+91 96294 26655</a></li>
+          <li><span class="contact-lbl">WhatsApp:</span> <a href="https://wa.me/919629426655" target="_blank" rel="noopener noreferrer">+91 96294 26655</a></li>
+          <li><span class="contact-lbl">Email:</span> <a href="mailto:rkr.enterprices@gmail.com">rkr.enterprices@gmail.com</a></li>
+          <li><span class="contact-lbl">Address:</span> 23/2 Madipakkam Main Road, Pallikaranai, Chennai - 600100</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> RKR TOUR. All rights reserved.</span>
+      <a class="text-link" href="#home">Back to top ↗</a>
+      <a href="credits.html">Image credits</a>
+    </div>
+  </footer>
+  <dialog id="vehicle-dialog" aria-labelledby="detail-name"><button class="dialog-close" type="button"
+      aria-label="Close vehicle details">×</button>
+    <div id="detail-content"></div><button class="button" id="detail-book" type="button">Book This Vehicle ↗</button>
+  </dialog>
+  <noscript>
+    <p class="noscript">Please enable JavaScript to load vehicles and submit requests. Navigation and journey
+      information remain available.</p>
+  </noscript>
+</body>
+
+</html>
