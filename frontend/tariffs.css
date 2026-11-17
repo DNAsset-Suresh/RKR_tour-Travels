@@ -26,7 +26,9 @@
 
 /* The selected model's details sit inside the right side of its media preview. */
 .showcase-screen{--detail-width:clamp(260px,28%,320px);width:100%;min-width:0;min-height:480px;background:#ffffff}
-.showcase-screen>video,.showcase-screen>#showcase-image{position:absolute;left:0;top:0;width:calc(100% - var(--detail-width) - 22px);height:100%;object-fit:contain;object-position:center;background:#ffffff}
+.showcase-screen>video,.showcase-screen>#showcase-image,
+.showcase-video-stage{position:absolute;left:0;top:0;width:calc(100% - var(--detail-width) - 22px);height:100%;object-fit:contain;object-position:center;background:#ffffff}
+.showcase-video-stage>video,.showcase-video-stage>#showcase-image{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;object-position:center;background:#ffffff}
 .showcase-sidebar>.showcase-overlay{position:absolute;z-index:3;right:18px;bottom:18px;display:grid;grid-template-columns:minmax(0,1fr);width:var(--detail-width);max-height:calc(100% - 36px);overflow-y:auto;margin:0;padding:22px;gap:16px;background:rgba(255,255,255,0.96);border:1px solid #e2e8f0;border-top:3px solid #bd4938;border-radius:18px;box-shadow:0 16px 36px rgba(0,0,0,0.1);backdrop-filter:blur(16px);color:#0f172a}
 .showcase-overlay .showcase-model{display:flex;flex-wrap:wrap;align-items:start;width:100%;gap:9px}
 .showcase-overlay .showcase-model h4{width:100%;max-width:none;font-family:Georgia,'Times New Roman',serif;font-size:23px;font-weight:500;line-height:1.2;color:#0f172a;letter-spacing:-.5px;overflow-wrap:anywhere}
@@ -51,7 +53,9 @@
 
 @media(max-width:760px){
  .showcase-screen{aspect-ratio:auto;min-height:0;display:flex;flex-direction:column}
- .showcase-screen>video,.showcase-screen>#showcase-image{position:relative;width:100%;height:auto;aspect-ratio:16/10;flex:none}
+ .showcase-screen>video,.showcase-screen>#showcase-image,
+ .showcase-video-stage{position:relative;width:100%;height:auto;aspect-ratio:16/10;flex:none}
+ .showcase-video-stage>video,.showcase-video-stage>#showcase-image{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;object-position:center;background:#ffffff}
  .showcase-sidebar>.showcase-overlay{position:relative;right:auto;bottom:auto;width:calc(100% - 24px);max-height:none;margin:0 12px 12px;padding:19px;gap:16px;overflow:visible}
  .showcase-overlay .showcase-model h4{font-size:23px}
  .showcase-overlay .showcase-tariff .tariff-packages dd{font-size:24px}

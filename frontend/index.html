@@ -87,9 +87,14 @@
         <div id="showcase-tabs" class="showcase-tabs" role="tablist" aria-label="Choose a vehicle to preview"></div>
         <div id="showcase-panel" role="tabpanel" tabindex="0">
           <div class="showcase-screen">
-            <video id="showcase-video" muted playsinline loop autoplay preload="auto"
-              aria-label="Selected vehicle reference video"></video>
-            <img id="showcase-image" src="assets/traveller.png" alt="Selected vehicle reference image" hidden>
+            <div class="showcase-video-stage">
+              <video id="showcase-video" muted playsinline loop autoplay preload="auto"
+                aria-label="Selected vehicle reference video"></video>
+              <img id="showcase-image" src="assets/traveller.png" alt="Selected vehicle reference image" hidden>
+              <div class="video-watermark" aria-hidden="true">
+                <img src="assets/logo.png" alt="RKR TOUR" class="video-watermark-logo">
+              </div>
+            </div>
             <p id="showcase-media-status" class="showcase-media-status" role="status"></p>
             <div class="showcase-sidebar">
               <div class="showcase-filter-panel">
