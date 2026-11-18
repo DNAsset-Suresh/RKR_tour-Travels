@@ -1,7 +1,7 @@
-import { createHmac,randomBytes,timingSafeEqual } from 'node:crypto';
+import { createHash,createHmac,timingSafeEqual } from 'node:crypto';
 import { TripError } from './mapService.js';
-// Process-local signatures expire along with quotes on restart; no secret reaches the client.
-const secret=randomBytes(32);
+// Stable signing secret across serverless instances; never exposed to the client.
+const secret=createHash('sha256').update(process.env.PLACE_SIGNING_SECRET||process.env.ADMIN_API_KEY||process.env.MONGODB_URI||'rkr-tour-place-signing-secret-v1').digest();
 const sign=data=>createHmac('sha256',secret).update(data).digest('base64url');
 export function confirmPlace(place) {
   const payload=Buffer.from(JSON.stringify({...place,expires:Date.now()+30*60*1000})).toString('base64url');

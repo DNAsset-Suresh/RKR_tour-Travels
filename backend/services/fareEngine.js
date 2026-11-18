@@ -1,8 +1,8 @@
-import { readFile } from 'node:fs/promises';
+import pricingData from '../config/vehicle-pricing.json' with { type: 'json' };
 const valid = value => typeof value === 'number' && Number.isFinite(value) && value >= 0;
 const money = value => Math.round((value + Number.EPSILON) * 100) / 100;
 export async function readPricing() {
-  return JSON.parse(await readFile(new URL('../config/vehicle-pricing.json', import.meta.url), 'utf8'));
+  return pricingData;
 }
 export function calculateFare(vehicle, trip, route, pricing) {
   const unavailable = reason => ({status:'quote_required', total:null, currency:'INR', reason, breakdown:[], assumptions:[], exclusions:[]});

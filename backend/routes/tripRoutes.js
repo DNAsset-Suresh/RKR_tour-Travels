@@ -34,9 +34,22 @@ tripRoutes.get('/config',async(req,res)=>{
   try{const pricing=await readPricing();const custom=Object.values(pricing.vehicles||{}).flatMap(v=>v.localPackages||[]);packages=[...new Map([...packages,...custom].map(p=>[p.id,{id:p.id,hours:p.hours,km:p.km}])).values()];}catch{}
   res.json({data:{mode:'open-routing',ready:true,aiReady:false,provider:'OpenStreetMap / OSRM',packages,tripTypes:['local','round_trip','one_way','outstation'],setupMessage:'Find your pickup and destination, confirm the matching places, and road distance will be calculated automatically. You can also enter a distance yourself.'}});
 });
+async function loadActiveVehicles(){
+  if(process.env.MONGODB_URI){
+    try{
+      const { connectMongo }=await import('../config/mongodb.js');
+      const { Vehicle }=await import('../models/Vehicle.js');
+      await connectMongo();
+      const vehicles=await Vehicle.find({is_active:true}).sort({display_order:1,id:1}).lean();
+      if(vehicles.length>0)return vehicles;
+    }catch(e){console.warn('MongoDB trip vehicle query failed, falling back to PostgreSQL:',e.message);}
+  }
+  const {rows}=await pool.query(`SELECT v.*,to_jsonb(t) AS tariff FROM vehicles v LEFT JOIN vehicle_tariffs t ON t.vehicle_id=v.id WHERE v.is_active=true ORDER BY v.display_order,v.id`);
+  return rows;
+}
 async function estimate(trip,route){
   let pricing;try{pricing=await readPricing();}catch{throw new TripError(503,'Vehicle pricing configuration could not be read. Please request a quotation.');}
-  const {rows}=await pool.query(`SELECT v.*,to_jsonb(t) AS tariff FROM vehicles v LEFT JOIN vehicle_tariffs t ON t.vehicle_id=v.id WHERE v.is_active=true ORDER BY v.display_order,v.id`);
+  const rows=await loadActiveVehicles();
   const fares=rows.map(v=>({id:v.id,name:v.name,category:v.category,image_path:v.image_path,video_path:v.video_path,passenger_capacity:v.passenger_capacity,fare:calculateFare(v,trip,route,pricing)}));
   const quote=saveQuote(trip,route,fares);
   return {quote,route,vehicles:fares};

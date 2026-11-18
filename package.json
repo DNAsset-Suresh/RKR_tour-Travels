@@ -3,12 +3,14 @@
   "version": "2.0.0",
   "private": true,
   "type": "module",
+  "main": "app.js",
   "scripts": {
+    "build": "node scripts/build-public.js",
     "start": "node backend/server.js",
     "seed:mongo": "node backend/scripts/seed-mongo.js"
   },
   "engines": {
-    "node": ">=22"
+    "node": "22.x"
   },
   "dependencies": {
     "cors": "^2.8.5",
