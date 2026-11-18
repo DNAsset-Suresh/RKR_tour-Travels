@@ -5,11 +5,12 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 const root=fileURLToPath(new URL('.',import.meta.url));
 const port=Number(process.env.FRONTEND_PORT || 3001);
-const types={'.html':'text/html','.css':'text/css','.js':'text/javascript','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.ico':'image/x-icon','.mp4':'video/mp4'};
+const types={'.html':'text/html','.css':'text/css','.js':'text/javascript','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.ico':'image/x-icon','.mp4':'video/mp4','.xml':'application/xml','.txt':'text/plain','.json':'application/json'};
 http.createServer(async(req,res)=>{
   try {
     const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
-    const relative=pathname==='/'?'index.html':pathname.slice(1);
+    let relative=pathname==='/'?'index.html':pathname.slice(1);
+    if (!path.extname(relative) && !relative.endsWith('/')) relative += '.html';
     const file=path.resolve(root,relative);
     if (!file.startsWith(root) || relative.split(/[\\/]/).some(p=>p.startsWith('.')) || !types[path.extname(file)] || ['dev-server.js'].includes(relative)) {res.writeHead(404);return res.end('Not found');}
     if(path.extname(file)==='.mp4'){

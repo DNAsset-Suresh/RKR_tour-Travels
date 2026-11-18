@@ -680,8 +680,12 @@ h1 {
   margin-bottom: 38px
 }
 
+.section-heading h1,
 .section-heading h2 {
-  margin: 0
+  margin: 0;
+  font-size: clamp(38px, 4vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -2.4px
 }
 
 .heading-note {

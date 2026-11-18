@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /credits.html
+
+# Update domain once custom domain (e.g. https://rkrtour.com) is connected
+Sitemap: https://rkr-tour-travels.vercel.app/sitemap.xml

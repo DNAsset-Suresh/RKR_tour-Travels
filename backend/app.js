@@ -51,7 +51,7 @@ app.use(express.json({ limit: '16kb' }));
 
 // Serve static assets when available locally or bundled
 if (staticDir) {
-  app.use(express.static(staticDir));
+  app.use(express.static(staticDir, { extensions: ['html'] }));
 }
 
 app.use('/api', rateLimit({ windowMs: 15*60*1000, limit: 300, standardHeaders:'draft-8', legacyHeaders:false, message:{error:{message:'Too many requests. Please wait a few minutes.'}} }));

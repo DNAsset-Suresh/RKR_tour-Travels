@@ -11,11 +11,14 @@
   position: relative;
 }
 
-.cinematic-showcase h3 {
+.cinematic-showcase h3,
+.cinematic-showcase h2.showcase-seo-heading {
   margin: 0 0 22px;
   color: #0f172a;
+  font-family: inherit;
   font-size: 13px;
   font-weight: 700;
+  line-height: 1.4;
   letter-spacing: 2.2px;
   text-transform: uppercase;
   display: flex;
@@ -24,7 +27,8 @@
   flex-wrap: wrap;
 }
 
-.cinematic-showcase h3 span {
+.cinematic-showcase h3 span,
+.cinematic-showcase h2.showcase-seo-heading span {
   color: #bd4938;
   font-weight: 600;
 }
