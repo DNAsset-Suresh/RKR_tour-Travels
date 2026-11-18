@@ -11,7 +11,7 @@ export async function connectMongo() {
     throw new Error('MONGODB_URI is not defined in environment variables.');
   }
 
-  if (cached.conn) {
+  if (cached.conn && mongoose.connection.readyState === 1) {
     return cached.conn;
   }
 
@@ -19,16 +19,27 @@ export async function connectMongo() {
     const opts = {
       bufferCommands: false,
       maxPoolSize: 10,
-      serverSelectionTimeoutMS: 8000,
+      connectTimeoutMS: 3500,
+      serverSelectionTimeoutMS: 3500,
+      socketTimeoutMS: 5000,
     };
     cached.promise = mongoose.connect(uri, opts).then(m => m.connection);
   }
 
+  let timer;
   try {
-    cached.conn = await cached.promise;
+    cached.conn = await Promise.race([
+      cached.promise,
+      new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error('MongoDB connection timed out')), 3800);
+      })
+    ]);
   } catch (e) {
     cached.promise = null;
+    cached.conn = null;
     throw e;
+  } finally {
+    clearTimeout(timer);
   }
 
   return cached.conn;

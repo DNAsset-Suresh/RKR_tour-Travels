@@ -5,6 +5,7 @@ import { pool } from '../config/database.js';
 import { isDeepStrictEqual } from 'node:util';
 import { manualJourney } from './manualJourney.js';
 import { createOpenRoutingService } from './openRoutingService.js';
+import { VEHICLES_CATALOG } from '../config/vehiclesCatalog.js';
 
 async function findActiveVehicle(vehicleId, db) {
   if (db === pool && process.env.MONGODB_URI) {
@@ -16,8 +17,13 @@ async function findActiveVehicle(vehicleId, db) {
       if (v) return v;
     } catch (e) { console.warn('MongoDB quote validation query failed:', e.message); }
   }
-  const result = await db.query('SELECT v.*,to_jsonb(t) AS tariff FROM vehicles v LEFT JOIN vehicle_tariffs t ON t.vehicle_id=v.id WHERE v.id=$1 AND v.is_active=true', [vehicleId]);
-  return result.rows[0];
+  if (db !== pool || !process.env.VERCEL) {
+    try {
+      const result = await db.query('SELECT v.*,to_jsonb(t) AS tariff FROM vehicles v LEFT JOIN vehicle_tariffs t ON t.vehicle_id=v.id WHERE v.id=$1 AND v.is_active=true', [vehicleId]);
+      if (result.rows[0]) return result.rows[0];
+    } catch (e) { console.warn('PostgreSQL quote validation query failed:', e.message); }
+  }
+  return VEHICLES_CATALOG.find(v => v.id === Number(vehicleId) && v.is_active);
 }
 
 export async function revalidateQuote(quote,vehicleId,{service=createGoogleMapsService(),openService=createOpenRoutingService(),pricingReader=readPricing,db=pool}={}) {
