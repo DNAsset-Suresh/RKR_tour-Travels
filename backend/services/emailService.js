@@ -620,14 +620,15 @@ export function buildBookingNotificationTemplate(data) {
           <td>${safeTripType}</td>
         </tr>
         <tr>
-          <th>Special Notes</th>
-          <td>${safeNotes}</td>
-        </tr>
-        <tr>
           <th>Submitted At</th>
           <td>${submittedAt} IST</td>
         </tr>
       </table>
+
+      <h4 style="margin:20px 0 8px 0; font-size:14px; color:#0b1329; text-transform:uppercase; letter-spacing:0.5px;">Customer Message / Instructions:</h4>
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:16px; margin:10px 0 20px 0; color:#1e293b; font-size:14px; line-height:1.6;">
+        ${safeNotes}
+      </div>
 
       <div class="quick-actions">
         <strong>Direct Operator Actions:</strong><br>
