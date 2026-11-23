@@ -23,7 +23,9 @@ foreach ($bin in $pgBins) {
 
 # 2. Resolve Node executable
 $nodeExe = $null
-if (Get-Command 'node.exe' -ErrorAction SilentlyContinue) {
+if (Test-Path "$projectRoot\.local\node.cmd") {
+    $nodeExe = "$projectRoot\.local\node.cmd"
+} elseif (Get-Command 'node.exe' -ErrorAction SilentlyContinue) {
     $nodeExe = (Get-Command 'node.exe').Source
 } elseif (Test-Path 'C:\Users\DELL\AppData\Local\Programs\Antigravity IDE\Antigravity IDE.exe') {
     $nodeExe = 'C:\Users\DELL\AppData\Local\Programs\Antigravity IDE\Antigravity IDE.exe'

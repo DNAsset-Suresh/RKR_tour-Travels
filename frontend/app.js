@@ -184,7 +184,14 @@ function clearErrors(form) { form.querySelectorAll('.field-error').forEach(e => 
 function markFields(form, fields) { for (const [name, message] of Object.entries(fields)) { const input = form.elements.namedItem(name); if (!input) continue; input.setAttribute('aria-invalid', 'true'); const error = node('span', message, 'field-error'); error.id = `${form.id}-${name}-error`; input.setAttribute('aria-describedby', error.id); input.after(error); } form.querySelector('[aria-invalid=true]')?.focus(); }
 function validate(form, kind) {
   const errors = {}; for (const input of form.querySelectorAll('input,select,textarea')) { if (!input.checkValidity()) errors[input.name] = input.validity.valueMissing ? 'Please complete this field.' : input.validationMessage; else if (input.required && !input.value.trim()) errors[input.name] = 'Please complete this field.'; }
-  const mobile = form.elements.mobile_number.value.trim(); if (!/^\+?[\d ()-]+$/.test(mobile) || !/^\d{7,15}$/.test(mobile.replace(/\D/g, ''))) errors.mobile_number = 'Enter a mobile number with 7–15 digits; include country code if needed.';
+  const mobile = form.elements.mobile_number?.value.trim(); if (mobile && (!/^\+?[\d ()-]+$/.test(mobile) || !/^\d{7,15}$/.test(mobile.replace(/\D/g, '')))) errors.mobile_number = 'Enter a mobile number with 7–15 digits; include country code if needed.';
+  const email = form.elements.email?.value.trim();
+  if (kind === 'contact') {
+    if (!email) errors.email = 'Please enter your email address.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = 'Please enter a valid email address.';
+  } else if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errors.email = 'Please enter a valid email address.';
+  }
   if (kind === 'booking') {
     if (!form.elements.vehicle_id.value) errors.vehicle_id = 'Choose a vehicle. If the list is unavailable, retry loading it above.';
     const date = form.elements.journey_date.value, time = form.elements.pickup_time.value;
@@ -199,7 +206,7 @@ for (const kind of ['booking', 'contact']) {
     if (Object.keys(errors).length) { markFields(form, errors); feedback.classList.add('error'); feedback.textContent = 'Please check the highlighted details before sending.'; return; }
     const data = Object.fromEntries(new FormData(form)); Object.keys(data).forEach(k => data[k] = data[k].trim());
     if (kind === 'booking') { data.vehicle_id = Number(data.vehicle_id); data.passenger_count = Number(data.passenger_count); if (form.dataset.quoteId) data.quote_id = form.dataset.quoteId; }
-    const button = form.querySelector('[type=submit]'), label = button.textContent; button.disabled = true; button.textContent = 'Saving your request…'; form.setAttribute('aria-busy', 'true');
+    const button = form.querySelector('[type=submit]'), label = button.textContent; button.disabled = true; button.textContent = kind === 'contact' ? 'Sending...' : 'Saving your request…'; form.setAttribute('aria-busy', 'true');
     try {
       const result = await api(kind === 'booking' ? '/bookings' : '/contact', { method: 'POST', body: JSON.stringify(data) });
       feedback.classList.add('success');
@@ -223,7 +230,7 @@ for (const kind of ['booking', 'contact']) {
       feedback.focus({ preventScroll: true });
       feedback.scrollIntoView({ behavior: reduced.matches ? 'instant' : 'smooth', block: 'nearest' });
     }
-    catch (error) { feedback.classList.add('error'); feedback.textContent = error.message; if (error.fields) markFields(form, error.fields); }
+    catch (error) { feedback.classList.add('error'); feedback.textContent = error.message || 'Something went wrong while submitting your enquiry. Please try again or contact us directly.'; if (error.fields) markFields(form, error.fields); }
     finally { button.disabled = false; button.textContent = label; form.removeAttribute('aria-busy'); }
   });
 }

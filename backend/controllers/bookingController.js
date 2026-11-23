@@ -3,6 +3,7 @@ import { pool } from '../config/database.js';
 import { bookingQuote, getQuote } from '../services/tripQuotes.js';
 import { revalidateQuote } from '../services/quoteValidation.js';
 import { TripError } from '../services/mapService.js';
+import { sendBookingEmails } from '../services/emailService.js';
 
 const bad = (res, message) => res.status(422).json({ error: { message, fields: { vehicle_id: message } } });
 
@@ -56,6 +57,27 @@ export async function createBooking(req, res) {
       booking_status: 'pending'
     });
 
+    // Send email notification to owners and confirmation to customer
+    sendBookingEmails({
+      booking_reference: reference,
+      customer_name: b.customer_name,
+      mobile_number: b.mobile_number,
+      email: b.email,
+      pickup_location: b.pickup_location,
+      destination: b.destination,
+      journey_date: b.journey_date,
+      pickup_time: b.pickup_time,
+      vehicle_id: b.vehicle_id,
+      vehicle_name: v?.name || 'Fleet Vehicle',
+      passenger_count: b.passenger_count,
+      trip_type: b.trip_type,
+      additional_requirements: b.additional_requirements || '',
+      journey_estimate: estimate || null,
+      created_at: newBooking.created_at
+    }).catch(err => {
+      console.error('[BookingController] Email dispatch error:', err.message);
+    });
+
     return res.status(201).json({
       data: {
         id: newBooking._id,
@@ -88,6 +110,28 @@ export async function createBooking(req, res) {
       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING id,booking_reference,booking_status,created_at`,
       [reference, b.customer_name, b.mobile_number, b.email || null, b.pickup_location, b.destination, b.journey_date, b.pickup_time, b.vehicle_id, b.passenger_count, b.trip_type, b.additional_requirements, estimate ? JSON.stringify(estimate) : null]);
     await client.query('COMMIT');
+
+    // Send email notification to owners and confirmation to customer
+    sendBookingEmails({
+      booking_reference: reference,
+      customer_name: b.customer_name,
+      mobile_number: b.mobile_number,
+      email: b.email,
+      pickup_location: b.pickup_location,
+      destination: b.destination,
+      journey_date: b.journey_date,
+      pickup_time: b.pickup_time,
+      vehicle_id: b.vehicle_id,
+      vehicle_name: v?.name || 'Fleet Vehicle',
+      passenger_count: b.passenger_count,
+      trip_type: b.trip_type,
+      additional_requirements: b.additional_requirements || '',
+      journey_estimate: estimate || null,
+      created_at: saved.created_at
+    }).catch(err => {
+      console.error('[BookingController] Email dispatch error:', err.message);
+    });
+
     res.status(201).json({ data: saved, message: 'Your journey request has been saved. Availability and reservation are pending operator confirmation.' });
   } catch (e) { await client.query('ROLLBACK').catch(() => {}); throw e; } finally { client.release(); }
 }
