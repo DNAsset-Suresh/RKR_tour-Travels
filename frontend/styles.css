@@ -1469,17 +1469,17 @@ img {
 
 @media(max-width:760px) {
   html {
-    scroll-padding-top: 76px
+    scroll-padding-top: 68px
   }
 
   .site-header {
-    height: 76px;
-    padding-inline: 6%;
-    gap: 15px
+    height: 64px;
+    padding-inline: 4.5%;
+    gap: 12px
   }
 
   .site-header.scrolled {
-    height: 64px
+    height: 56px
   }
 
   .brand {
@@ -1487,12 +1487,12 @@ img {
   }
 
   .brand-logo {
-    height: 34px;
+    height: 32px;
     max-width: 120px
   }
 
   .site-header.scrolled .brand-logo {
-    height: 28px
+    height: 26px
   }
 
   .brand-text {
@@ -1505,27 +1505,29 @@ img {
 
   .menu-toggle {
     display: flex;
-    gap: 13px;
+    gap: 8px;
     align-items: center;
-    background: transparent;
-    border: 1px solid #c6ccbf;
-    border-radius: 6px;
-    padding: 8px 12px;
-    font-size: 12px
+    background: #ffffff;
+    border: 1px solid #dcdad4;
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    min-height: 40px
   }
 
   .site-header nav {
     position: absolute;
-    top: 76px;
+    top: 100%;
     left: 0;
     right: 0;
     background: var(--cream);
-    padding: 20px 6%;
+    padding: 16px 5%;
     border-bottom: 1px solid var(--line);
     flex-direction: column;
     gap: 8px;
     display: none;
-    box-shadow: 0 18px 25px #1c292219
+    box-shadow: 0 16px 25px #1c292219
   }
 
   .site-header nav.open {
@@ -1548,8 +1550,9 @@ img {
   }
 
   h1 {
-    font-size: clamp(53px, 10vw, 75px);
-    letter-spacing: -2.8px
+    font-size: clamp(26px, 7vw, 38px);
+    letter-spacing: -0.8px;
+    line-height: 1.2
   }
 
   .hero-copy .eyebrow {
@@ -1659,21 +1662,22 @@ img {
   }
 
   .section {
-    padding: 65px 6%
+    padding: 32px 5%
   }
 
   .section-heading {
     display: block;
-    margin-bottom: 25px
+    margin-bottom: 20px
   }
 
   h2 {
-    font-size: 40px;
-    letter-spacing: -1.6px
+    font-size: clamp(22px, 6vw, 30px);
+    letter-spacing: -0.6px;
+    line-height: 1.25
   }
 
   .heading-note {
-    margin-top: 24px;
+    margin-top: 14px;
     max-width: 100%
   }
 
@@ -2159,15 +2163,157 @@ img {
   display: block
 }
 
+.mobile-quick-strip {
+  display: none;
+}
+
+.mobile-bottom-nav {
+  display: none;
+}
+
 @media(max-width:768px) {
   .home-video-section {
-    height: calc(100vh - 80px);
-    min-height: 360px
+    height: auto !important;
+    aspect-ratio: 16/9;
+    min-height: 210px;
+    max-height: 48vh;
+    background: #090b10;
+    border-bottom: 1px solid rgba(212, 168, 75, 0.2);
+  }
+
+  .home-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .mobile-quick-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 10px 4.5%;
+    background: linear-gradient(180deg, #12151c 0%, #1a1e28 100%);
+    border-bottom: 1px solid rgba(212, 168, 75, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  }
+
+  .mobile-quick-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 9px 4px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    transition: transform 0.15s ease;
+    min-height: 48px;
+  }
+
+  .mobile-quick-btn:active {
+    transform: scale(0.97);
+  }
+
+  .mobile-quick-btn .quick-icon {
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  .mobile-quick-btn.call-btn {
+    background: rgba(255, 255, 255, 0.08);
+    color: #f3f4f6;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .mobile-quick-btn.wa-btn {
+    background: rgba(37, 211, 102, 0.15);
+    color: #25d366;
+    border: 1px solid rgba(37, 211, 102, 0.35);
+  }
+
+  .mobile-quick-btn.fare-btn {
+    background: linear-gradient(135deg, #bd4938, #d4a84b);
+    color: #ffffff;
+    border: 1px solid rgba(212, 168, 75, 0.45);
+  }
+
+  body {
+    padding-bottom: 62px;
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 58px;
+    background: rgba(18, 21, 28, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid rgba(212, 168, 75, 0.3);
+    z-index: 999;
+    align-items: center;
+    justify-content: space-around;
+    padding-inline: 4px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: #a3a6b5;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 5px 8px;
+    border-radius: 8px;
+    min-width: 52px;
+    transition: color 0.15s ease;
+  }
+
+  .mobile-nav-item .nav-icon {
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  .mobile-nav-item:active,
+  .mobile-nav-item:hover {
+    color: #d4a84b;
+  }
+
+  .mobile-nav-item.mobile-nav-wa {
+    color: #25d366;
+  }
+
+  .mobile-nav-item.mobile-nav-primary {
+    background: linear-gradient(135deg, #bd4938, #d4a84b);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(189, 73, 56, 0.3);
+  }
+}
+
+@media(max-width:480px) {
+  .home-video-section {
+    aspect-ratio: 16/9;
+    min-height: 195px;
+    max-height: 42vh;
   }
 }
 
 .fleet-section {
-  padding-top: 48px
+  padding-top: 36px;
 }
 
 @media(prefers-reduced-motion:reduce) {
@@ -2499,6 +2645,24 @@ img {
   }
 }
 
+@media(max-width:500px) {
+  .travel-ticket-card {
+    padding: 16px 14px;
+    border-radius: 14px
+  }
+
+  .ticket-station strong {
+    max-width: 90px;
+    font-size: 14px
+  }
+
+  .ticket-stamp {
+    font-size: 16px;
+    padding: 6px 14px;
+    letter-spacing: 2px
+  }
+}
+
 
 /* ==========================================================================
    PREMIUM FLEET PAGE STYLING
@@ -2548,6 +2712,42 @@ img {
   font-weight: 500;
   color: #374151;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+@media(max-width:768px) {
+  .fleet-section {
+    padding-top: 20px !important;
+    padding-bottom: 30px !important;
+  }
+
+  .fleet-luxury-pill {
+    font-size: 8.5px;
+    padding: 4px 10px;
+    letter-spacing: 1.2px;
+    margin-bottom: 10px;
+  }
+
+  .fleet-perks {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .fleet-perk {
+    font-size: 10.5px;
+    padding: 6px 8px;
+    justify-content: center;
+    white-space: nowrap;
+  }
+}
+
+@media(max-width:400px) {
+  .fleet-perk {
+    font-size: 9px;
+    padding: 5px 6px;
+    gap: 4px;
+  }
 }
 
 .fleet-explorer {
